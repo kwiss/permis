@@ -60,7 +60,7 @@ export function StudyCard({ questionSet, isMastered }: StudyCardProps) {
   const { id, verification, securite, secours } = questionSet;
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="w-full">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-mono">
@@ -84,7 +84,7 @@ export function StudyCard({ questionSet, isMastered }: StudyCardProps) {
               {verification.type === "VI" ? "Vérification Intérieure" : "Vérification Extérieure"}
             </span>
           </div>
-          <p className="text-sm text-muted-foreground">{verification.question}</p>
+          <p className="text-base font-medium">{verification.question}</p>
           <QuestionImage src={verification.image} alt={verification.question} />
           <div className="p-3 rounded-md bg-muted">
             <p className="text-sm">{verification.answer}</p>
@@ -105,7 +105,7 @@ export function StudyCard({ questionSet, isMastered }: StudyCardProps) {
             <Badge className="text-xs">2</Badge>
             <span className="text-sm font-medium">Sécurité Routière</span>
           </div>
-          <p className="text-sm text-muted-foreground">{securite.question}</p>
+          <p className="text-base font-medium">{securite.question}</p>
           <QuestionImage src={securite.image} alt={securite.question} />
           <div className="p-3 rounded-md bg-muted">
             <p className="text-sm">
@@ -137,7 +137,7 @@ export function StudyCard({ questionSet, isMastered }: StudyCardProps) {
             <Badge className="text-xs">3</Badge>
             <span className="text-sm font-medium">Premiers Secours</span>
           </div>
-          <p className="text-sm text-muted-foreground">{secours.question}</p>
+          <p className="text-base font-medium">{secours.question}</p>
           <QuestionImage src={secours.image} alt={secours.question} />
           <div className="p-3 rounded-md bg-muted">
             <p className="text-sm">
