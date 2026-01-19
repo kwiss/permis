@@ -99,6 +99,24 @@ export default function HomePage() {
           </Card>
         </Link>
 
+        <Link href="/quiz?mode=discovery" className="block">
+          <Card className="hover:border-primary/50 transition-colors cursor-pointer">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center text-2xl">
+                  🎯
+                </div>
+                <div>
+                  <h2 className="font-semibold text-lg">Premier Passage</h2>
+                  <p className="text-sm text-muted-foreground">
+                    Découvre les 100 sets une première fois
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
+
         <Link href="/quiz" className="block">
           <Card className="hover:border-primary/50 transition-colors cursor-pointer">
             <CardContent className="p-6">
@@ -107,7 +125,7 @@ export default function HomePage() {
                   🚗
                 </div>
                 <div>
-                  <h2 className="font-semibold text-lg">Quiz Complet</h2>
+                  <h2 className="font-semibold text-lg">Révision</h2>
                   <p className="text-sm text-muted-foreground">
                     3 questions par set (examen réel)
                   </p>

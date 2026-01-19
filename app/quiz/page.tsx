@@ -13,12 +13,14 @@ import { questionSets } from "@/data/questions";
 
 type QuizState = "idle" | "question" | "result";
 type QuestionPhase = 0 | 1 | 2;
-type QuizMode = "full" | "secours";
+type QuizMode = "full" | "secours" | "discovery";
 
 function QuizContent() {
   const searchParams = useSearchParams();
-  const mode: QuizMode = searchParams.get("mode") === "secours" ? "secours" : "full";
+  const modeParam = searchParams.get("mode");
+  const mode: QuizMode = modeParam === "secours" ? "secours" : modeParam === "discovery" ? "discovery" : "full";
   const isSecoursMode = mode === "secours";
+  const isDiscoveryQuiz = mode === "discovery";
 
   const {
     recordQuizAnswer,
@@ -41,6 +43,11 @@ function QuizContent() {
   const maxPhase = isSecoursMode ? 0 : 2; // 1 question for secours, 3 for full
 
   const allSetIds = useMemo(() => questionSets.map((s) => s.id), []);
+
+  // Get never-attempted sets for discovery quiz mode
+  const neverAttemptedSets = useMemo(() => {
+    return allSetIds.filter(id => !getQuizHistory(id));
+  }, [allSetIds, getQuizHistory]);
   const currentSet = currentSetId
     ? questionSets.find((s) => s.id === currentSetId)
     : null;
@@ -57,7 +64,20 @@ function QuizContent() {
   const neverAttemptedCount = allSetIds.length - attemptedSetIds.size;
 
   const startNewSet = useCallback(() => {
-    const setId = getRandomQuizSet(allSetIds, recentSets, discoveryMode);
+    let setId: number;
+
+    if (isDiscoveryQuiz) {
+      // Discovery quiz mode: only pick from never-attempted sets
+      const available = neverAttemptedSets.filter(id => !recentSets.includes(id));
+      if (available.length === 0) {
+        // All sets have been attempted
+        return;
+      }
+      setId = available[Math.floor(Math.random() * available.length)];
+    } else {
+      setId = getRandomQuizSet(allSetIds, recentSets, discoveryMode);
+    }
+
     setCurrentSetId(setId);
     setQuestionPhase(0);
     setAnswers([]);
@@ -68,7 +88,7 @@ function QuizContent() {
       const updated = [...prev, setId];
       return updated.slice(-COOLDOWN_SIZE);
     });
-  }, [allSetIds, getRandomQuizSet, recentSets, discoveryMode]);
+  }, [allSetIds, getRandomQuizSet, recentSets, discoveryMode, isDiscoveryQuiz, neverAttemptedSets]);
 
   const handleAnswer = useCallback(
     (isCorrect: boolean) => {
@@ -138,6 +158,71 @@ function QuizContent() {
   // Idle state
   if (quizState === "idle") {
     const notMasteredCount = allSetIds.filter((id) => !isMastered(id)).length;
+
+    // Discovery quiz mode - dedicated first pass through all 100 sets
+    if (isDiscoveryQuiz) {
+      const remaining = neverAttemptedSets.length;
+      const completed = allSetIds.length - remaining;
+      const allDone = remaining === 0;
+
+      return (
+        <main className="min-h-screen p-4 max-w-md mx-auto flex flex-col">
+          <div className="flex items-center justify-between mb-8">
+            <Link href="/">
+              <Button variant="ghost" size="sm">
+                ← Retour
+              </Button>
+            </Link>
+            <ThemeToggle />
+          </div>
+
+          <div className="flex-1 flex flex-col items-center justify-center text-center">
+            <h1 className="text-2xl font-bold mb-2">
+              {allDone ? "Bravo !" : "Premier Passage"}
+            </h1>
+            <p className="text-muted-foreground mb-8 max-w-xs">
+              {allDone
+                ? "Tu as parcouru tous les 100 sets ! Tu peux maintenant passer en mode révision."
+                : "Parcours tous les sets une première fois pour les découvrir."}
+            </p>
+
+            <Card className="w-full mb-6">
+              <CardContent className="p-4">
+                <div className="grid grid-cols-2 gap-4 text-center">
+                  <div>
+                    <div className="text-2xl font-bold">{completed}</div>
+                    <div className="text-xs text-muted-foreground">Complétés</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold">{remaining}</div>
+                    <div className="text-xs text-muted-foreground">Restants</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {allDone ? (
+              <div className="flex flex-col gap-3 w-full max-w-xs">
+                <Link href="/quiz" className="block">
+                  <Button size="lg" className="w-full">
+                    Mode Révision
+                  </Button>
+                </Link>
+                <Link href="/" className="block">
+                  <Button variant="outline" size="lg" className="w-full">
+                    Accueil
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <Button size="lg" className="w-full max-w-xs" onClick={startNewSet}>
+                Continuer ({remaining} restants)
+              </Button>
+            )}
+          </div>
+        </main>
+      );
+    }
 
     return (
       <main className="min-h-screen p-4 max-w-md mx-auto flex flex-col">
@@ -334,14 +419,31 @@ function QuizContent() {
           )}
 
           <div className="flex flex-col gap-3 w-full max-w-xs">
-            <Button size="lg" onClick={startNewSet}>
-              Set suivant
-            </Button>
-            <Link href="/" className="block">
-              <Button variant="outline" size="lg" className="w-full">
-                Terminer
-              </Button>
-            </Link>
+            {isDiscoveryQuiz && neverAttemptedSets.length === 0 ? (
+              <>
+                <Link href="/quiz" className="block">
+                  <Button size="lg" className="w-full">
+                    Mode Révision
+                  </Button>
+                </Link>
+                <Link href="/" className="block">
+                  <Button variant="outline" size="lg" className="w-full">
+                    Accueil
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Button size="lg" onClick={startNewSet}>
+                  Set suivant {isDiscoveryQuiz && `(${neverAttemptedSets.length} restants)`}
+                </Button>
+                <Link href="/" className="block">
+                  <Button variant="outline" size="lg" className="w-full">
+                    Terminer
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
