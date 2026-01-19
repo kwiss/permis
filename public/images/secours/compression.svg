@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Hand pressing down for hemorrhage control -->
+  <!-- Hand shape -->
+  <path d="M20,30 L20,22 Q20,18 24,18 L26,18 Q28,18 28,22 L28,26
+           L30,20 Q30,16 34,16 L34,16 Q38,16 38,20 L38,26
+           L40,22 Q40,18 44,18 L44,18 Q48,18 48,22 L48,30
+           L48,28 Q50,24 52,28 L52,34
+           L52,44 Q52,52 44,52 L24,52 Q16,52 16,44 L16,38 Q16,30 20,30 Z"
+        fill="#FFE4C4" stroke="#333" stroke-width="1.5"/>
+  <!-- Pressure arrows -->
+  <path d="M32,4 L32,14" stroke="#DC143C" stroke-width="3" stroke-linecap="round"/>
+  <path d="M26,8 L32,14 L38,8" stroke="#DC143C" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Blood/wound indicator -->
+  <ellipse cx="32" cy="58" rx="10" ry="4" fill="#DC143C" opacity="0.7"/>
+</svg>

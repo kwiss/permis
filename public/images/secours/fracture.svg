@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Bone with crack/fracture -->
+  <!-- Bone shape -->
+  <path d="M12,16 Q8,12 12,8 Q16,4 20,8 Q24,12 20,16
+           L20,20 L22,32 L20,44 L20,48
+           Q24,52 20,56 Q16,60 12,56 Q8,52 12,48 L12,44 L10,32 L12,20 Z"
+        fill="#F5F5DC" stroke="#333" stroke-width="1.5"/>
+  <path d="M52,16 Q56,12 52,8 Q48,4 44,8 Q40,12 44,16
+           L44,20 L42,32 L44,44 L44,48
+           Q40,52 44,56 Q48,60 52,56 Q56,52 52,48 L52,44 L54,32 L52,20 Z"
+        fill="#F5F5DC" stroke="#333" stroke-width="1.5"/>
+  <!-- Fracture crack in center -->
+  <path d="M22,28 L26,30 L24,32 L28,34 L24,36 L26,38 L22,40"
+        stroke="#DC143C" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M42,28 L38,30 L40,32 L36,34 L40,36 L38,38 L42,40"
+        stroke="#DC143C" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Pain indicators -->
+  <circle cx="32" cy="24" r="2" fill="#DC143C"/>
+  <circle cx="32" cy="40" r="2" fill="#DC143C"/>
+  <!-- Jagged break line -->
+  <path d="M26,32 L30,28 L32,34 L34,30 L38,32"
+        stroke="#DC143C" stroke-width="2" stroke-linecap="round" fill="none"/>
+</svg>
