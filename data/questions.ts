@@ -1,26 +1,22 @@
 export interface QuestionSet {
   id: number;
-  image?: string; // Path to main illustration for this set
   verification: {
     type: "VI" | "VE";
     question: string;
     answer: string;
     tip?: string;
-    image?: string; // Optional specific image for this question
   };
   securite: {
     question: string;
     answer: string;
     keywords: string[];
     tip?: string;
-    image?: string;
   };
   secours: {
     question: string;
     answer: string;
     keywords: string[];
     tip?: string;
-    image?: string;
   };
 }
 
@@ -32,7 +28,6 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez la commande de réglage de hauteur des feux.",
       answer: "Dispositif situé en général à gauche du volant.",
       tip: "Cherche une molette avec un symbole de phare et des traits. Souvent près du bouton des feux.",
-      image: "/images/vehicule/feux-croisement.svg",
     },
     securite: {
       question: "Pourquoi doit-on régler la hauteur des feux ?",
@@ -45,7 +40,6 @@ export const questionSets: QuestionSet[] = [
       answer: "En délimitant clairement et largement la zone de danger de façon visible pour protéger les victimes et éviter un sur-accident.",
       keywords: ["délimiter", "visible", "sur-accident"],
       tip: "Règle PAS : Protéger, Alerter, Secourir. Protection = éviter le sur-accident (2ème accident).",
-      image: "/images/secours/gilet-securite.svg",
     },
   },
   {
@@ -97,14 +91,12 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état du flanc sur l'un des pneumatiques.",
       answer: "En bon état (toute anomalie doit être signalée).",
       tip: "Regarde le côté du pneu : pas de coupure, hernie (bosse), craquelure. Le flanc = partie visible entre la jante et la bande de roulement.",
-      image: "/images/vehicule/pneu-schema.svg",
     },
     securite: {
       question: "Citez un endroit où l'on peut trouver les pressions préconisées pour les pneumatiques ?",
       answer: "Elles sont indiquées : soit sur une plaque sur une portière, soit dans la notice d'utilisation du véhicule, soit au niveau de la trappe à carburant.",
       keywords: ["portière", "notice", "trappe à carburant"],
       tip: "Mnémo PNT : Portière (côté conducteur), Notice, Trappe carburant. Souvent un autocollant !",
-      image: "/images/vehicule/pneu-schema.svg",
     },
     secours: {
       question: "Sur autoroute, comment indiquer avec précision les lieux de l'accident depuis un téléphone portable ?",
@@ -120,21 +112,18 @@ export const questionSets: QuestionSet[] = [
       question: "Faites fonctionner les essuie-glaces avants du véhicule sur la position la plus rapide.",
       answer: "Le candidat actionne les essuie-glaces.",
       tip: "Commodo droit généralement. Position la plus haute = vitesse max. Vérifie que ça balaye bien.",
-      image: "/images/vehicule/essuie-glace.svg",
     },
     securite: {
       question: "Comment détecter leur usure en circulation ?",
       answer: "En cas de pluie, lorsqu'ils laissent des traces sur le pare brise.",
       keywords: ["pluie", "traces", "pare-brise"],
       tip: "Traces = caoutchouc durci ou abîmé. Change les balais tous les ans idéalement (fin d'été).",
-      image: "/images/vehicule/essuie-glace.svg",
     },
     secours: {
       question: "Comment vérifier la respiration d'une victime ?",
       answer: "Regarder si le ventre et la poitrine se soulèvent et sentir de l'air à l'expiration.",
       keywords: ["ventre", "poitrine", "soulèvent", "air", "expiration"],
       tip: "Technique VES : Voir (thorax bouge), Écouter (souffle), Sentir (air sur ta joue). Max 10 secondes !",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -156,7 +145,6 @@ export const questionSets: QuestionSet[] = [
       answer: "C'est lorsque la victime ne répond pas et ne réagit pas mais respire.",
       keywords: ["ne répond pas", "ne réagit pas", "respire"],
       tip: "Inconscient ≠ mort. PLS obligatoire si respire ! Différent de l'arrêt cardiaque (ne respire pas).",
-      image: "/images/secours/pls.svg",
     },
   },
   {
@@ -166,14 +154,12 @@ export const questionSets: QuestionSet[] = [
       question: "Vérifiez la présence du gilet de haute visibilité.",
       answer: "Le candidat doit indiquer où il se trouve sans obligation de le sortir.",
       tip: "Doit être accessible SANS SORTIR du véhicule (boîte à gants, vide-poche portière). Pas dans le coffre !",
-      image: "/images/secours/gilet-securite.svg",
     },
     securite: {
       question: "En cas de panne ou d'accident, quel autre accessoire de sécurité est obligatoire ?",
       answer: "Le triangle de pré-signalisation.",
       keywords: ["triangle", "pré-signalisation"],
       tip: "Gilet + Triangle = duo obligatoire. Gilet sur soi AVANT de sortir, triangle à 30m derrière.",
-      image: "/images/secours/gilet-securite.svg",
     },
     secours: {
       question: "Si un dégagement d'urgence de la victime est nécessaire, où doit-elle être déplacée ?",
@@ -189,21 +175,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez où s'effectue le contrôle du niveau du liquide de frein.",
       answer: "Le candidat montre que le niveau est entre le mini et le maxi.",
       tip: "Bocal transparent près du maître-cylindre (côté conducteur). Bouchon souvent jaune. Niveau entre MIN et MAX.",
-      image: "/images/vehicule/liquide-frein.svg",
     },
     securite: {
       question: "Quelle est la conséquence d'un niveau insuffisant du liquide de frein ?",
       answer: "Une perte d'efficacité du freinage.",
       keywords: ["perte", "efficacité", "freinage"],
       tip: "Niveau bas = fuite possible ou plaquettes usées. DANGER : la pédale peut s'enfoncer sans freiner !",
-      image: "/images/vehicule/temoin-frein.svg",
     },
     secours: {
       question: "En cas de panne ou d'accident, quel équipement de sécurité doit être porté avant de quitter le véhicule ?",
       answer: "Il faut porter le gilet de haute visibilité avant de sortir du véhicule.",
       keywords: ["gilet", "haute visibilité"],
       tip: "AVANT de sortir = tu l'enfiles dans la voiture. La nuit, tu es invisible sans gilet !",
-      image: "/images/secours/gilet-securite.svg",
     },
   },
   {
@@ -234,21 +217,18 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état de tous les balais d'essuie-glace du véhicule.",
       answer: "En bon état (toute anomalie doit être signalée).",
       tip: "Avant + arrière ! Caoutchouc pas fissuré, pas décollé. Soulève le balai pour vérifier toute la longueur.",
-      image: "/images/vehicule/essuie-glace.svg",
     },
     securite: {
       question: "Quel est le risque de circuler avec des balais d'essuie-glace défectueux ?",
       answer: "Une mauvaise visibilité en cas d'intempéries.",
       keywords: ["mauvaise visibilité", "intempéries"],
       tip: "Pluie + mauvais balais = quasi aveugle ! Change-les dès qu'ils laissent des traces.",
-      image: "/images/vehicule/essuie-glace.svg",
     },
     secours: {
       question: "Quels sont les numéros d'urgence à composer ?",
       answer: "Le 18 (sapeurs-pompiers), le 15 (SAMU), le 112 (urgence européen).",
       keywords: ["18", "15", "112", "pompiers", "SAMU"],
       tip: "Mnémo : 15 = SAMU (quinze = médecin). 18 = Pompiers (dix-huit = feu). 112 = partout en Europe, même sans réseau !",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -258,7 +238,6 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez l'indicateur de niveau de carburant.",
       answer: "Le candidat montre l'indicateur sur le tableau de bord.",
       tip: "Jauge avec symbole pompe à essence. La flèche à côté indique de quel côté est la trappe !",
-      image: "/images/vehicule/temoin-carburant.svg",
     },
     securite: {
       question: "Quelles sont les précautions à prendre lors du remplissage du réservoir ?",
@@ -271,7 +250,6 @@ export const questionSets: QuestionSet[] = [
       answer: "La placer en position stable sur le côté ou position latérale de sécurité. Alerter les secours. Surveiller la respiration de la victime jusqu'à l'arrivée des secours.",
       keywords: ["PLS", "position latérale", "alerter", "surveiller"],
       tip: "PLS = évite l'étouffement (langue, vomi). Main sous la joue, jambe pliée en équerre. Surveille qu'elle respire toujours !",
-      image: "/images/secours/pls.svg",
     },
   },
   {
@@ -281,21 +259,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez où s'effectue le remplissage du liquide de refroidissement.",
       answer: "Le candidat ouvre le capot et montre le bocal.",
       tip: "Bocal translucide avec liquide coloré (vert, rose, orange). Bouchon avec symbole thermomètre ou vapeur. JAMAIS ouvrir à chaud !",
-      image: "/images/vehicule/temoin-temperature.svg",
     },
     securite: {
       question: "Quel est le danger si l'on complète le niveau du liquide lorsque le moteur est chaud ?",
       answer: "Un risque de brûlure.",
       keywords: ["brûlure", "moteur chaud"],
       tip: "Liquide à 90°C sous pression ! Si tu ouvres = geyser brûlant. Attends que le moteur soit froid.",
-      image: "/images/vehicule/temoin-temperature.svg",
     },
     secours: {
       question: "Comment arrêter une hémorragie ?",
       answer: "En appuyant fortement sur l'endroit qui saigne avec les doigts ou avec la paume de la main en mettant un tissu propre sur la plaie.",
       keywords: ["appuyer", "tissu propre", "plaie"],
       tip: "Compression directe = pression forte et continue. Allonge la victime pour éviter le malaise. Ne relâche JAMAIS la pression !",
-      image: "/images/secours/compression-hemorragie.svg",
     },
   },
   {
@@ -326,14 +301,12 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état, la propreté et le fonctionnement de tous les clignotants côté trottoir.",
       answer: "Vérification des clignotants propres, en bon état et fonctionnent.",
       tip: "Avant + arrière côté passager ! Allume les warnings pour vérifier les 4 d'un coup.",
-      image: "/images/vehicule/clignotant.svg",
     },
     securite: {
       question: "Quelle est la signification d'un clignotement plus rapide ?",
       answer: "Non fonctionnement de l'une des ampoules.",
       keywords: ["ampoule", "grillée", "rapide"],
       tip: "Tic-tic-tic rapide = ampoule grillée de ce côté. Le relais détecte moins de charge électrique.",
-      image: "/images/vehicule/clignotant.svg",
     },
     secours: {
       question: "Quelles sont les conditions pour réaliser le dégagement d'urgence d'une victime en présence d'un danger réel, immédiat et non contrôlable ?",
@@ -349,21 +322,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez le voyant d'alerte signalant une pression insuffisante d'huile dans le moteur.",
       answer: "Le candidat montre le voyant huile (burette).",
       tip: "Symbole burette d'huile (comme une lampe d'Aladin). Rouge = STOP immédiat ! Le moteur tourne sans lubrification.",
-      image: "/images/vehicule/temoin-huile.svg",
     },
     securite: {
       question: "Quelles sont les conditions à respecter pour contrôler le niveau d'huile ?",
       answer: "Moteur froid et sur un terrain plat.",
       keywords: ["moteur froid", "terrain plat"],
       tip: "Froid = huile redescendue dans le carter. Plat = niveau correct. Attends 5-10 min après avoir coupé le moteur.",
-      image: "/images/vehicule/temoin-huile.svg",
     },
     secours: {
       question: "Quelles sont les trois informations à transmettre aux services de secours ?",
       answer: "Le numéro de téléphone à partir duquel l'appel est émis, la nature et la localisation la plus précise du problème.",
       keywords: ["numéro", "nature", "localisation"],
       tip: "Mnémo TNL : Téléphone (ton numéro), Nature (accident, malaise...), Localisation (adresse précise). Ne raccroche pas en premier !",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -373,21 +343,18 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état, la propreté et le fonctionnement du ou des feux de brouillard arrière.",
       answer: "Vérification des feux, propres, en bon état et fonctionnent.",
       tip: "Feu orange très puissant à l'arrière. Symbole : phare avec ligne ondulée barrée. Un seul suffit (souvent côté conducteur).",
-      image: "/images/vehicule/feux-brouillard-arriere.svg",
     },
     securite: {
       question: "Dans quels cas les utilise-t-on ?",
       answer: "Par temps de brouillard et neige.",
       keywords: ["brouillard", "neige"],
       tip: "Visibilité < 50m uniquement ! Sinon tu éblouis celui qui te suit. Pense à l'éteindre quand ça se dégage.",
-      image: "/images/vehicule/feux-brouillard-arriere.svg",
     },
     secours: {
       question: "Par quels moyens doit être réalisée l'alerte des secours ?",
       answer: "L'alerte doit être donnée à l'aide d'un téléphone portable ou, à défaut, d'une borne d'appel d'urgence.",
       keywords: ["téléphone", "borne d'appel"],
       tip: "Le 112 fonctionne même sans crédit, sans carte SIM, et avec n'importe quel réseau disponible !",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -409,7 +376,6 @@ export const questionSets: QuestionSet[] = [
       answer: "ALERTER: alerter immédiatement les secours. MASSER: pratiquer une réanimation cardio-pulmonaire. DEFIBRILLER: utiliser un défibrillateur automatique (DAE) si possible.",
       keywords: ["alerter", "masser", "défibriller", "DAE"],
       tip: "Mnémo AMD : Alerter (15 ou 112), Masser (100-120/min au milieu du thorax), Défibriller (le DAE parle et te guide).",
-      image: "/images/secours/massage-cardiaque.svg",
     },
   },
   {
@@ -419,21 +385,18 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état, la propreté et le fonctionnement des feux de détresse à l'avant et à l'arrière.",
       answer: "Vérification des feux, propres, en bon état et fonctionnent.",
       tip: "Bouton triangle rouge. Active les 4 clignotants en même temps. Vérifie que les 4 clignotent bien (avant + arrière).",
-      image: "/images/vehicule/warning-hazard.svg",
     },
     securite: {
       question: "Dans quels cas doit-on les utiliser ?",
       answer: "En cas de panne, d'accident ou de ralentissement important.",
       keywords: ["panne", "accident", "ralentissement"],
       tip: "Aussi appelés \"warnings\". Sur autoroute : allume-les dès que tu freines fort pour prévenir ceux derrière !",
-      image: "/images/vehicule/warning-hazard.svg",
     },
     secours: {
       question: "Dans quel cas peut-on positionner une victime en Position Latérale de Sécurité (PLS) ?",
       answer: "Si la victime ne répond pas, ne réagit pas et respire.",
       keywords: ["ne répond pas", "respire", "PLS"],
       tip: "PLS = inconscient qui RESPIRE. Si ne respire pas = massage cardiaque ! Vérifie toujours la respiration d'abord.",
-      image: "/images/secours/pls.svg",
     },
   },
   {
@@ -449,7 +412,6 @@ export const questionSets: QuestionSet[] = [
       answer: "Le confort de conduite. L'accessibilité aux commandes. La visibilité du tableau de bord. L'efficacité des airbags.",
       keywords: ["confort", "commandes", "visibilité", "airbags"],
       tip: "Airbag = 25 cm minimum entre le volant et ton thorax. Si trop près, l'airbag peut blesser au lieu de protéger !",
-      image: "/images/vehicule/airbag.svg",
     },
     secours: {
       question: "Dans quelle situation peut-on déplacer une victime ?",
@@ -465,21 +427,18 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état, la propreté et le fonctionnement des feux de route.",
       answer: "Vérification des feux, propres, en bon état et fonctionnent.",
       tip: "Feux de route = pleins phares. Symbole phare avec rayons horizontaux. Voyant bleu au tableau de bord.",
-      image: "/images/vehicule/feux-route.svg",
     },
     securite: {
       question: "Citez un cas d'utilisation de l'appel lumineux.",
       answer: "Pour avertir de son approche. En cas de danger. A la place de l'avertisseur sonore.",
       keywords: ["approche", "danger", "avertisseur"],
       tip: "Appel de phares = signal. Interdit pour râler ! Sers-t'en pour signaler un danger ou ton approche dans un virage sans visibilité.",
-      image: "/images/vehicule/feux-route.svg",
     },
     secours: {
       question: "En cas de panne ou d'accident, quel équipement de sécurité doit être porté avant de quitter le véhicule ?",
       answer: "Il faut porter le gilet de haute visibilité avant de sortir du véhicule.",
       keywords: ["gilet", "haute visibilité"],
       tip: "Gilet = tu deviens visible à 150m au lieu de 20m la nuit. Enfile-le DANS la voiture avant d'ouvrir la portière.",
-      image: "/images/secours/gilet-securite.svg",
     },
   },
   {
@@ -510,14 +469,12 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez où doit s'effectuer le contrôle du niveau d'huile moteur.",
       answer: "Le candidat montre la jauge. Pas de manipulation exigée.",
       tip: "Tige avec anneau coloré (souvent jaune ou orange). Retire, essuie, replonge, retire : niveau entre MIN et MAX.",
-      image: "/images/vehicule/temoin-huile.svg",
     },
     securite: {
       question: "Quel est le principal risque d'un manque d'huile moteur ?",
       answer: "Un risque de détérioration ou de casse du moteur.",
       keywords: ["détérioration", "casse moteur"],
       tip: "Huile = sang du moteur. Sans lubrification, les pièces métalliques frottent = surchauffe = serrage moteur (plusieurs milliers d'€).",
-      image: "/images/vehicule/temoin-huile.svg",
     },
     secours: {
       question: "Comment est diffusée l'alerte émise par le Signal d'Alerte et d'Information aux Populations (SAIP) ?",
@@ -533,21 +490,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez le voyant d'alerte signalant un défaut de batterie.",
       answer: "Le candidat montre le voyant batterie.",
       tip: "Symbole batterie (rectangle avec + et -). Rouge = alternateur ne charge plus. Tu roules sur la réserve !",
-      image: "/images/vehicule/temoin-batterie.svg",
     },
     securite: {
       question: "Qu'est-ce qui peut provoquer la décharge de la batterie, moteur éteint ?",
       answer: "Les feux ou accessoires électriques en fonctionnement.",
       keywords: ["feux", "accessoires", "électriques"],
       tip: "Feux allumés moteur coupé = batterie vide en quelques heures. Aussi : radio, chargeur USB, dashcam...",
-      image: "/images/vehicule/temoin-batterie.svg",
     },
     secours: {
       question: "A partir de quel âge peut-on suivre une formation aux premiers secours ?",
       answer: "A partir de 10 ans.",
       keywords: ["10 ans"],
       tip: "PSC1 (Prévention et Secours Civiques niveau 1) = 7h de formation, diplôme à vie. Très utile !",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -557,21 +511,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez l'emplacement de la batterie du véhicule.",
       answer: "Le candidat montre la batterie sous le capot.",
       tip: "Boîtier rectangulaire avec 2 bornes (+ rouge, - noir). Parfois cachée sous un cache plastique ou dans le coffre.",
-      image: "/images/vehicule/temoin-batterie.svg",
     },
     securite: {
       question: "Quelle est la solution en cas de panne de batterie pour démarrer le véhicule sans le déplacer ?",
       answer: "Brancher une deuxième batterie en parallèle (ou les \"+\" ensemble et les \"-\" ensemble) ou la remplacer.",
       keywords: ["deuxième batterie", "parallèle", "remplacer"],
       tip: "Câbles de démarrage : Rouge sur + des 2 batteries, Noir sur - des 2. Démarre la voiture en panne, attends 5 min, débranche dans l'ordre inverse.",
-      image: "/images/vehicule/temoin-batterie.svg",
     },
     secours: {
       question: "Pourquoi faut-il pratiquer immédiatement une réanimation cardio-pulmonaire sur une victime en arrêt cardiaque ?",
       answer: "Car les lésions du cerveau surviennent dès les premières minutes.",
       keywords: ["lésions cerveau", "premières minutes"],
       tip: "3 min sans oxygène = lésions cérébrales. 5 min = lésions irréversibles. Chaque seconde compte !",
-      image: "/images/secours/massage-cardiaque.svg",
     },
   },
   {
@@ -581,21 +532,18 @@ export const questionSets: QuestionSet[] = [
       question: "De quelle couleur est le voyant qui indique une défaillance du système de freinage ?",
       answer: "Rouge.",
       tip: "Rouge = DANGER = STOP ! Peut aussi indiquer frein à main serré. Vérifie d'abord le frein à main.",
-      image: "/images/vehicule/temoin-frein.svg",
     },
     securite: {
       question: "Quel est le risque de circuler avec un frein de parking mal desserré ?",
       answer: "Une dégradation du système de freinage.",
       keywords: ["dégradation", "freinage"],
       tip: "Frein à main serré en roulant = surchauffe des freins arrière = usure prématurée + perte d'efficacité + odeur de brûlé.",
-      image: "/images/vehicule/frein-main.svg",
     },
     secours: {
       question: "Hors autoroute ou endroit dangereux, en cas de panne ou d'accident, où doit être placé le triangle de pré-signalisation ?",
       answer: "Le triangle de pré-signalisation doit être placé à une distance d'environ 30 m de la panne ou de l'accident, ou avant un virage, ou un sommet de côte.",
       keywords: ["30 mètres", "virage", "sommet de côte"],
       tip: "30m = 30 grands pas. Place-le où il sera VISIBLE : avant le virage, avant la côte. Pas sur autoroute (interdit de marcher dessus) !",
-      image: "/images/secours/gilet-securite.svg",
     },
   },
   {
@@ -605,14 +553,12 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état, la propreté et le fonctionnement des feux de croisement.",
       answer: "Vérification des feux, propres, en bon état et fonctionnent.",
       tip: "Feux de croisement = codes. Symbole phare avec rayons inclinés vers le bas. Éclaire à 30m sans éblouir.",
-      image: "/images/vehicule/feux-croisement.svg",
     },
     securite: {
       question: "Quelles sont les conséquences d'un mauvais réglage de ces feux ?",
       answer: "Une mauvaise vision vers l'avant et un risque d'éblouissement des autres usagers.",
       keywords: ["mauvaise vision", "éblouissement"],
       tip: "Trop haut = éblouis les autres. Trop bas = tu ne vois pas assez loin. Réglage à faire en garage.",
-      image: "/images/vehicule/feux-croisement.svg",
     },
     secours: {
       question: "Dans quelle situation peut-on déplacer une victime ?",
@@ -628,21 +574,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez le voyant d'alerte signalant une température trop élevée du liquide de refroidissement.",
       answer: "Le candidat montre le voyant température.",
       tip: "Symbole thermomètre dans l'eau. Rouge = STOP immédiat ! Le moteur surchauffe, risque de casse.",
-      image: "/images/vehicule/temoin-temperature.svg",
     },
     securite: {
       question: "Quelle est la conséquence d'une température trop élevée de ce liquide ?",
       answer: "Une détérioration du moteur.",
       keywords: ["détérioration", "moteur"],
       tip: "Surchauffe = joint de culasse qui lâche = réparation très coûteuse. Arrête-toi, ouvre le capot, attends que ça refroidisse.",
-      image: "/images/vehicule/temoin-temperature.svg",
     },
     secours: {
       question: "Comment et pourquoi protéger une zone de danger en cas d'accident de la route ?",
       answer: "En délimitant clairement et largement la zone de danger de façon visible pour protéger les victimes et éviter un sur-accident.",
       keywords: ["délimiter", "visible", "sur-accident"],
       tip: "Allume tes warnings, gare-toi en sécurité, enfile le gilet, place le triangle. Dans cet ordre !",
-      image: "/images/secours/gilet-securite.svg",
     },
   },
   {
@@ -652,21 +595,18 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état, la propreté et le fonctionnement des feux de position à l'avant et à l'arrière.",
       answer: "Vérification des feux, propres, en bon état et fonctionnent.",
       tip: "Feux de position = veilleuses. Tout petits feux blancs devant, rouges derrière. Servent à être vu, pas à voir.",
-      image: "/images/vehicule/feux-position.svg",
     },
     securite: {
       question: "Quand doit-on les utiliser ?",
       answer: "La nuit, en agglomération, si l'éclairage public est suffisant.",
       keywords: ["nuit", "agglomération", "éclairage suffisant"],
       tip: "En ville bien éclairée : veilleuses suffisent. Hors agglo ou éclairage insuffisant : codes obligatoires.",
-      image: "/images/vehicule/feux-position.svg",
     },
     secours: {
       question: "Quels sont les numéros d'urgence à composer ?",
       answer: "Le 18 (sapeurs-pompiers), le 15 (SAMU), le 112 (urgence européen).",
       keywords: ["18", "15", "112", "pompiers", "SAMU"],
       tip: "Le 114 = urgence par SMS (sourds/malentendants). Tous gratuits depuis n'importe quel téléphone.",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -676,21 +616,18 @@ export const questionSets: QuestionSet[] = [
       question: "Actionnez les feux de détresse et montrez le voyant correspondant.",
       answer: "Le candidat actionne les feux de détresse et montre le voyant.",
       tip: "Gros bouton rouge avec triangle. Fait clignoter les 4 clignotants. Voyant = triangle qui clignote.",
-      image: "/images/vehicule/warning-hazard.svg",
     },
     securite: {
       question: "Dans quels cas doit-on les utiliser ?",
       answer: "En cas de panne, d'accident ou de ralentissement important.",
       keywords: ["panne", "accident", "ralentissement"],
       tip: "Sur autoroute : active-les dès que tu vois un bouchon se former devant toi pour prévenir ceux qui arrivent !",
-      image: "/images/vehicule/warning-hazard.svg",
     },
     secours: {
       question: "Qu'est-ce qu'une perte de connaissance ?",
       answer: "C'est lorsque la victime ne répond pas et ne réagit pas mais respire.",
       keywords: ["ne répond pas", "ne réagit pas", "respire"],
       tip: "Test : secoue légèrement les épaules et pose des questions simples. Si aucune réaction mais respire = inconscient.",
-      image: "/images/secours/pls.svg",
     },
   },
   {
@@ -721,21 +658,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez la commande du signal sonore (avertisseur).",
       answer: "Le candidat montre le klaxon.",
       tip: "Au centre du volant généralement. Certaines voitures ont aussi un bouton sur le commodo.",
-      image: "/images/vehicule/klaxon.svg",
     },
     securite: {
       question: "En agglomération, quand peut-on utiliser l'avertisseur sonore ?",
       answer: "Uniquement en cas de danger immédiat.",
       keywords: ["danger immédiat", "agglomération"],
       tip: "Interdit de klaxonner pour dire bonjour ou pour râler ! Amende de 35€. Seule exception : danger.",
-      image: "/images/vehicule/klaxon.svg",
     },
     secours: {
       question: "Comment vérifier la respiration d'une victime ?",
       answer: "Regarder si le ventre et la poitrine se soulèvent et sentir de l'air à l'expiration.",
       keywords: ["ventre", "poitrine", "soulèvent", "air", "expiration"],
       tip: "Libère les voies aériennes d'abord (bascule la tête en arrière, menton vers le haut). Puis VES pendant 10 sec max.",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -766,21 +700,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez l'emplacement de l'airbag conducteur.",
       answer: "Le candidat montre l'airbag au centre du volant.",
       tip: "Au centre du volant, marqué 'AIRBAG' ou 'SRS'. Ne mets jamais d'autocollant dessus !",
-      image: "/images/vehicule/airbag.svg",
     },
     securite: {
       question: "Citez deux conditions pour que l'airbag soit efficace.",
       answer: "Etre attaché par la ceinture de sécurité. Etre à bonne distance de l'airbag (25 cm minimum).",
       keywords: ["ceinture", "25 cm", "distance"],
       tip: "Ceinture obligatoire : l'airbag seul ne suffit pas. Sans ceinture, l'airbag peut blesser gravement.",
-      image: "/images/vehicule/airbag.svg",
     },
     secours: {
       question: "Comment arrêter une hémorragie ?",
       answer: "En appuyant fortement sur l'endroit qui saigne avec les doigts ou avec la paume de la main en mettant un tissu propre sur la plaie.",
       keywords: ["appuyer", "tissu propre", "plaie"],
       tip: "Pression directe et MAINTENUE. Allonge la victime. Ne retire jamais le premier tissu, ajoute par-dessus si besoin.",
-      image: "/images/secours/compression-hemorragie.svg",
     },
   },
   {
@@ -790,21 +721,18 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état et la propreté de tous les rétroviseurs.",
       answer: "Vérification des rétroviseurs propres et en bon état.",
       tip: "3 rétros : intérieur + 2 extérieurs. Pas de fissure, pas de saleté. Ils doivent refléter correctement.",
-      image: "/images/vehicule/retroviseur.svg",
     },
     securite: {
       question: "Pourquoi faut-il vérifier l'état des rétroviseurs avant chaque départ ?",
       answer: "Pour garantir une bonne visibilité vers l'arrière et les côtés.",
       keywords: ["visibilité", "arrière", "côtés"],
       tip: "Angles morts + rétros = vision complète. Un rétro mal réglé = danger lors des changements de voie.",
-      image: "/images/vehicule/retroviseur.svg",
     },
     secours: {
       question: "Quelles sont les trois informations à transmettre aux services de secours ?",
       answer: "Le numéro de téléphone à partir duquel l'appel est émis, la nature et la localisation la plus précise du problème.",
       keywords: ["numéro", "nature", "localisation"],
       tip: "Le régulateur va te guider avec des questions. Réponds calmement. Ne raccroche JAMAIS en premier.",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -877,21 +805,18 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état de la bande de roulement sur l'un des pneumatiques.",
       answer: "En bon état (toute anomalie doit être signalée).",
       tip: "Bande de roulement = partie qui touche le sol. Vérifie les rainures (témoins d'usure à 1,6 mm minimum).",
-      image: "/images/vehicule/pneu-schema.svg",
     },
     securite: {
       question: "Comment s'appelle l'indicateur d'usure sur les pneumatiques ?",
       answer: "Le témoin d'usure.",
       keywords: ["témoin", "usure"],
       tip: "Petites bosses dans les rainures à 1,6 mm. Si la gomme est au niveau du témoin = pneu usé = à changer.",
-      image: "/images/vehicule/pneu-schema.svg",
     },
     secours: {
       question: "Par quels moyens doit être réalisée l'alerte des secours ?",
       answer: "L'alerte doit être donnée à l'aide d'un téléphone portable ou, à défaut, d'une borne d'appel d'urgence.",
       keywords: ["téléphone", "borne d'appel"],
       tip: "Bornes oranges tous les 2 km sur autoroute. Reliées directement aux secours avec ta position exacte.",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -901,21 +826,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez l'interrupteur des feux de détresse.",
       answer: "Le candidat montre l'interrupteur (bouton triangle rouge).",
       tip: "Gros bouton rouge avec triangle, bien visible au centre du tableau de bord. Facile à trouver même sans regarder.",
-      image: "/images/vehicule/warning-hazard.svg",
     },
     securite: {
       question: "Dans quels cas peut-on utiliser les feux de détresse en circulant ?",
       answer: "Pour signaler un ralentissement important dû à un embouteillage ou un accident.",
       keywords: ["ralentissement", "embouteillage", "accident"],
       tip: "Utile sur autoroute : tu arrives sur un bouchon, tu allumes les warnings pour prévenir ceux qui arrivent vite derrière.",
-      image: "/images/vehicule/warning-hazard.svg",
     },
     secours: {
       question: "Quels comportements adopter en présence d'une victime qui ne répond pas et ne réagit pas, mais respire ?",
       answer: "La placer en position stable sur le côté ou position latérale de sécurité. Alerter les secours. Surveiller la respiration de la victime jusqu'à l'arrivée des secours.",
       keywords: ["PLS", "position latérale", "alerter", "surveiller"],
       tip: "PLS : sur le côté, tête en arrière, bouche vers le sol (pour que les sécrétions s'écoulent). Couvre-la pour éviter l'hypothermie.",
-      image: "/images/secours/pls.svg",
     },
   },
   {
@@ -967,21 +889,18 @@ export const questionSets: QuestionSet[] = [
       question: "Vérifiez que les portes sont correctement fermées.",
       answer: "Le candidat vérifie la fermeture des portes.",
       tip: "Tire sur chaque poignée de l'intérieur. Un voyant au tableau de bord indique si une porte est mal fermée.",
-      image: "/images/vehicule/porte-ouverte.svg",
     },
     securite: {
       question: "Quel est le risque d'une porte mal fermée en roulant ?",
       answer: "Un risque d'ouverture accidentelle et d'éjection d'un passager.",
       keywords: ["ouverture", "éjection"],
       tip: "Vérifie le voyant 'porte ouverte' avant de partir. En cas de choc, une porte mal fermée peut s'ouvrir.",
-      image: "/images/vehicule/porte-ouverte.svg",
     },
     secours: {
       question: "Pourquoi faut-il pratiquer immédiatement une réanimation cardio-pulmonaire sur une victime en arrêt cardiaque ?",
       answer: "Car les lésions du cerveau surviennent dès les premières minutes.",
       keywords: ["lésions cerveau", "premières minutes"],
       tip: "Le cerveau ne supporte pas plus de 3-5 min sans oxygène. Masse en attendant le DAE et les secours.",
-      image: "/images/secours/massage-cardiaque.svg",
     },
   },
   {
@@ -1024,7 +943,6 @@ export const questionSets: QuestionSet[] = [
       answer: "Il faut porter le gilet de haute visibilité avant de sortir du véhicule.",
       keywords: ["gilet", "haute visibilité"],
       tip: "1 gilet obligatoire minimum. Recommandé : 1 pour chaque passager. Norme CE obligatoire.",
-      image: "/images/secours/gilet-securite.svg",
     },
   },
   {
@@ -1046,7 +964,6 @@ export const questionSets: QuestionSet[] = [
       answer: "Si la victime ne répond pas, ne réagit pas et respire.",
       keywords: ["ne répond pas", "respire", "PLS"],
       tip: "Si elle ne respire PAS = pas de PLS mais massage cardiaque ! Vérifie toujours la respiration d'abord.",
-      image: "/images/secours/pls.svg",
     },
   },
   {
@@ -1119,21 +1036,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez le réglage des rétroviseurs extérieurs.",
       answer: "Le candidat montre la commande de réglage.",
       tip: "Joystick ou boutons sur la portière conducteur. Souvent un sélecteur gauche/droite + croix directionnelle.",
-      image: "/images/vehicule/retroviseur.svg",
     },
     securite: {
       question: "Comment doit-on régler les rétroviseurs extérieurs ?",
       answer: "Pour voir l'horizon et une petite partie du flanc du véhicule.",
       keywords: ["horizon", "flanc"],
       tip: "Règle assis normalement. Tu dois voir un tout petit bout de ta voiture (repère) et surtout la route derrière.",
-      image: "/images/vehicule/retroviseur.svg",
     },
     secours: {
       question: "Qu'est-ce qu'une perte de connaissance ?",
       answer: "C'est lorsque la victime ne répond pas et ne réagit pas mais respire.",
       keywords: ["ne répond pas", "ne réagit pas", "respire"],
       tip: "Inconscient qui respire = PLS. Inconscient qui ne respire pas = arrêt cardiaque = massage. La distinction est CRUCIALE.",
-      image: "/images/secours/pls.svg",
     },
   },
   {
@@ -1143,7 +1057,6 @@ export const questionSets: QuestionSet[] = [
       question: "Vérifiez le bon état de fonctionnement des essuie-glaces arrière (si équipé).",
       answer: "Le candidat fait fonctionner l'essuie-glace arrière.",
       tip: "Commodo ou bouton dédié. Vérifie qu'il balaye bien et que le caoutchouc n'est pas craquelé.",
-      image: "/images/vehicule/essuie-glace.svg",
     },
     securite: {
       question: "Pourquoi est-il important de maintenir la lunette arrière propre ?",
@@ -1165,21 +1078,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez le voyant de ceinture de sécurité non attachée.",
       answer: "Le candidat montre le voyant ceinture.",
       tip: "Symbole personne avec ceinture. Rouge clignotant + bip si conducteur ou passager non attaché.",
-      image: "/images/vehicule/temoin-ceinture.svg",
     },
     securite: {
       question: "Quel est le risque de ne pas attacher sa ceinture de sécurité ?",
       answer: "En cas de choc, être projeté contre le pare-brise, le volant ou hors du véhicule.",
       keywords: ["projeté", "pare-brise", "hors véhicule"],
       tip: "À 50 km/h, le choc = chute du 4e étage. La ceinture divise par 3 le risque de mort. Même à l'arrière !",
-      image: "/images/vehicule/temoin-ceinture.svg",
     },
     secours: {
       question: "Comment vérifier la respiration d'une victime ?",
       answer: "Regarder si le ventre et la poitrine se soulèvent et sentir de l'air à l'expiration.",
       keywords: ["ventre", "poitrine", "soulèvent", "air", "expiration"],
       tip: "Bascule la tête en arrière pour libérer les voies aériennes. 10 secondes max pour vérifier !",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -1189,21 +1099,18 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état, la propreté et le fonctionnement de tous les clignotants côté route.",
       answer: "Vérification des clignotants propres, en bon état et fonctionnent.",
       tip: "Avant + arrière côté conducteur. Active le clignotant gauche pour vérifier les 2.",
-      image: "/images/vehicule/clignotant.svg",
     },
     securite: {
       question: "Pourquoi les clignotants sont-ils essentiels à la sécurité ?",
       answer: "Ils permettent d'indiquer ses intentions aux autres usagers.",
       keywords: ["indiquer", "intentions", "usagers"],
       tip: "Clignotant AVANT de tourner ou changer de voie, pas pendant ! Donne le temps aux autres de réagir.",
-      image: "/images/vehicule/clignotant.svg",
     },
     secours: {
       question: "Pourquoi l'alerte auprès des services de secours doit-elle être rapide et précise ?",
       answer: "Pour permettre aux services de secours d'apporter les moyens adaptés aux victimes dans le délai le plus court.",
       keywords: ["moyens adaptés", "délai court"],
       tip: "Un enfant, une personne âgée, une femme enceinte = moyens différents. Sois précis !",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -1213,21 +1120,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez le dispositif de commande du frein de parking.",
       answer: "Le candidat montre le frein à main ou le bouton de frein électrique.",
       tip: "Levier entre les sièges OU bouton 'P' sur la console. Les deux font la même chose.",
-      image: "/images/vehicule/frein-main.svg",
     },
     securite: {
       question: "Quand doit-on utiliser le frein de parking ?",
       answer: "A chaque stationnement du véhicule.",
       keywords: ["stationnement"],
       tip: "Même sur terrain plat ! Le frein de parking bloque mécaniquement les roues arrière. Sécurité supplémentaire.",
-      image: "/images/panneaux/parking.svg",
     },
     secours: {
       question: "Quelles sont les trois informations à transmettre aux services de secours ?",
       answer: "Le numéro de téléphone à partir duquel l'appel est émis, la nature et la localisation la plus précise du problème.",
       keywords: ["numéro", "nature", "localisation"],
       tip: "Donne ton numéro EN PREMIER au cas où l'appel coupe. Localisation = adresse exacte, point de repère visible.",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -1237,21 +1141,18 @@ export const questionSets: QuestionSet[] = [
       question: "Vérifiez la présence de la roue de secours ou du kit de réparation.",
       answer: "Le candidat indique l'emplacement (généralement dans le coffre).",
       tip: "Sous le plancher du coffre généralement. Certains véhicules n'ont qu'un kit anti-crevaison (bombe + compresseur).",
-      image: "/images/vehicule/pneu-schema.svg",
     },
     securite: {
       question: "Quelles vérifications doit-on faire concernant la roue de secours ?",
       answer: "Vérifier la pression et l'état du pneu.",
       keywords: ["pression", "état"],
       tip: "Roue de secours galette = max 80 km/h ! Vérifie la pression régulièrement (souvent plus élevée que les autres).",
-      image: "/images/vehicule/pneu-schema.svg",
     },
     secours: {
       question: "Comment arrêter une hémorragie ?",
       answer: "En appuyant fortement sur l'endroit qui saigne avec les doigts ou avec la paume de la main en mettant un tissu propre sur la plaie.",
       keywords: ["appuyer", "tissu propre", "plaie"],
       tip: "Mets des gants si tu en as (protection). Si le sang traverse, ajoute un autre tissu PAR-DESSUS, ne retire pas le premier.",
-      image: "/images/secours/compression-hemorragie.svg",
     },
   },
   {
@@ -1324,21 +1225,18 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état, la propreté et le fonctionnement des feux de brouillard avant (si équipé).",
       answer: "Vérification des feux, propres, en bon état et fonctionnent.",
       tip: "En bas du pare-chocs. Symbole phare avec lignes ondulées. Pas tous les véhicules en sont équipés.",
-      image: "/images/vehicule/feux-brouillard-avant.svg",
     },
     securite: {
       question: "Quand peut-on utiliser les feux de brouillard avant ?",
       answer: "Par temps de brouillard, de chute de neige ou de forte pluie.",
       keywords: ["brouillard", "neige", "forte pluie"],
       tip: "Éclairent large et bas. N'éblouissent pas. Utiles mais pas obligatoires (contrairement aux AB arrière en brouillard).",
-      image: "/images/vehicule/feux-brouillard-avant.svg",
     },
     secours: {
       question: "Par quels moyens doit être réalisée l'alerte des secours ?",
       answer: "L'alerte doit être donnée à l'aide d'un téléphone portable ou, à défaut, d'une borne d'appel d'urgence.",
       keywords: ["téléphone", "borne d'appel"],
       tip: "Bornes d'appel = repérage GPS intégré. Les secours savent EXACTEMENT où tu es.",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -1348,21 +1246,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez le témoin d'usure des plaquettes de frein (si équipé).",
       answer: "Le candidat montre le voyant.",
       tip: "Voyant avec cercle et segments de chaque côté. S'allume quand les plaquettes sont usées. Pas tous les véhicules l'ont.",
-      image: "/images/vehicule/temoin-frein.svg",
     },
     securite: {
       question: "Quel est le risque de circuler avec des plaquettes de frein usées ?",
       answer: "Une perte d'efficacité du freinage et un risque de détérioration des disques.",
       keywords: ["efficacité", "disques"],
       tip: "Plaquettes jusqu'au métal = bruit de crissement. Les disques s'abîment : réparation plus chère. Vérifie tous les 20 000 km.",
-      image: "/images/vehicule/temoin-frein.svg",
     },
     secours: {
       question: "Quels comportements adopter en présence d'une victime qui ne répond pas et ne réagit pas, mais respire ?",
       answer: "La placer en position stable sur le côté ou position latérale de sécurité. Alerter les secours. Surveiller la respiration de la victime jusqu'à l'arrivée des secours.",
       keywords: ["PLS", "position latérale", "alerter", "surveiller"],
       tip: "Surveille en permanence ! Si elle arrête de respirer, remets-la sur le dos et commence le massage cardiaque.",
-      image: "/images/secours/pls.svg",
     },
   },
   {
@@ -1393,14 +1288,12 @@ export const questionSets: QuestionSet[] = [
       question: "Vérifiez le fonctionnement du témoin lumineux du système de gestion de l'airbag.",
       answer: "Le voyant s'allume au démarrage puis s'éteint.",
       tip: "Voyant 'AIRBAG' ou symbole personne avec ballon. S'il reste allumé = problème, l'airbag peut ne pas se déclencher en cas de choc.",
-      image: "/images/vehicule/airbag.svg",
     },
     securite: {
       question: "Que signifie un témoin airbag qui reste allumé ?",
       answer: "Un dysfonctionnement du système airbag qui nécessite une vérification.",
       keywords: ["dysfonctionnement", "vérification"],
       tip: "L'airbag peut ne pas s'ouvrir OU s'ouvrir intempestivement. À faire vérifier rapidement en garage.",
-      image: "/images/vehicule/airbag.svg",
     },
     secours: {
       question: "Comment est diffusée l'alerte émise par le Signal d'Alerte et d'Information aux Populations (SAIP) ?",
@@ -1416,21 +1309,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez où s'effectue le réglage des phares.",
       answer: "Le candidat montre les vis de réglage sur le bloc optique.",
       tip: "Vis derrière le phare sous le capot. Réglage horizontal et vertical. À faire en garage avec un appareil spécial.",
-      image: "/images/vehicule/feux-croisement.svg",
     },
     securite: {
       question: "Pourquoi est-il important que les phares soient bien réglés ?",
       answer: "Pour bien éclairer la route sans éblouir les autres usagers.",
       keywords: ["éclairer", "éblouir"],
       tip: "Phares mal réglés = principal motif d'éblouissement. À vérifier après changement d'ampoule ou chargement du véhicule.",
-      image: "/images/vehicule/feux-croisement.svg",
     },
     secours: {
       question: "Pourquoi faut-il pratiquer immédiatement une réanimation cardio-pulmonaire sur une victime en arrêt cardiaque ?",
       answer: "Car les lésions du cerveau surviennent dès les premières minutes.",
       keywords: ["lésions cerveau", "premières minutes"],
       tip: "Le massage maintient un flux sanguin vers le cerveau. Même mal fait, c'est mieux que rien !",
-      image: "/images/secours/massage-cardiaque.svg",
     },
   },
   {
@@ -1440,21 +1330,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez le voyant de charge de la batterie.",
       answer: "Le candidat montre le voyant batterie.",
       tip: "Symbole batterie (rectangle avec + et -). S'allume au démarrage puis s'éteint. S'il reste allumé = alternateur HS.",
-      image: "/images/vehicule/temoin-batterie.svg",
     },
     securite: {
       question: "Que faire si ce voyant s'allume en roulant ?",
       answer: "S'arrêter rapidement car la batterie ne se recharge plus.",
       keywords: ["arrêter", "ne recharge plus"],
       tip: "Tu roules sur la réserve de la batterie (30 min à 2h). Coupe tout ce qui consomme (clim, radio) et va au garage le plus proche.",
-      image: "/images/vehicule/temoin-batterie.svg",
     },
     secours: {
       question: "Hors autoroute ou endroit dangereux, en cas de panne ou d'accident, où doit être placé le triangle de pré-signalisation ?",
       answer: "Le triangle de pré-signalisation doit être placé à une distance d'environ 30 m de la panne ou de l'accident, ou avant un virage, ou un sommet de côte.",
       keywords: ["30 mètres", "virage", "sommet de côte"],
       tip: "Place-le avec le gilet AVANT la zone dangereuse. Marche face au trafic pour voir les voitures arriver.",
-      image: "/images/secours/gilet-securite.svg",
     },
   },
   {
@@ -1476,7 +1363,6 @@ export const questionSets: QuestionSet[] = [
       answer: "Il faut porter le gilet de haute visibilité avant de sortir du véhicule.",
       keywords: ["gilet", "haute visibilité"],
       tip: "Enfile-le assis dans la voiture. Sors par le côté opposé au trafic si possible.",
-      image: "/images/secours/gilet-securite.svg",
     },
   },
   {
@@ -1498,7 +1384,6 @@ export const questionSets: QuestionSet[] = [
       answer: "Si la victime ne répond pas, ne réagit pas et respire.",
       keywords: ["ne répond pas", "respire", "PLS"],
       tip: "La PLS libère les voies aériennes et permet l'écoulement des liquides (vomi, sang). Position stable = tu peux aller chercher de l'aide.",
-      image: "/images/secours/pls.svg",
     },
   },
   {
@@ -1592,14 +1477,12 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état de la fixation du rétroviseur extérieur côté conducteur.",
       answer: "Le rétroviseur doit être bien fixé, sans jeu.",
       tip: "Pousse légèrement le rétro : il ne doit pas bouger de sa base. Sinon = fixation à resserrer ou coque à changer.",
-      image: "/images/vehicule/retroviseur.svg",
     },
     securite: {
       question: "Pourquoi le rétroviseur extérieur gauche est-il particulièrement important ?",
       answer: "Pour surveiller les angles morts à gauche lors des dépassements et changements de voie.",
       keywords: ["angles morts", "dépassements", "voie"],
       tip: "Avant tout dépassement : rétro + contrôle par-dessus l'épaule (angle mort). Un vélo peut s'y cacher !",
-      image: "/images/vehicule/retroviseur.svg",
     },
     secours: {
       question: "Si un dégagement d'urgence de la victime est nécessaire, où doit-elle être déplacée ?",
@@ -1678,21 +1561,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez où s'effectue la vérification du niveau de liquide de frein.",
       answer: "Le candidat montre le bocal de liquide de frein.",
       tip: "Bocal transparent près du maître-cylindre, bouchon souvent jaune. Niveau visible entre MIN et MAX sans ouvrir.",
-      image: "/images/vehicule/liquide-frein.svg",
     },
     securite: {
       question: "A quelle fréquence doit être changé le liquide de frein ?",
       answer: "Tous les 2 ans ou selon les préconisations du constructeur.",
       keywords: ["2 ans", "constructeur"],
       tip: "Le liquide de frein absorbe l'humidité avec le temps. Eau = point d'ébullition plus bas = risque de vapor lock (pédale molle).",
-      image: "/images/vehicule/liquide-frein.svg",
     },
     secours: {
       question: "Comment arrêter une hémorragie ?",
       answer: "En appuyant fortement sur l'endroit qui saigne avec les doigts ou avec la paume de la main en mettant un tissu propre sur la plaie.",
       keywords: ["appuyer", "tissu propre", "plaie"],
       tip: "Position allongée, jambes surélevées (si possible). Parle à la victime pour la rassurer et surveiller sa conscience.",
-      image: "/images/secours/compression-hemorragie.svg",
     },
   },
   {
@@ -1702,21 +1582,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez la commande permettant de faire fonctionner le klaxon.",
       answer: "Le candidat montre le klaxon au centre du volant.",
       tip: "Au centre du volant. Certains véhicules ont aussi un petit bouton sur un commodo.",
-      image: "/images/vehicule/klaxon.svg",
     },
     securite: {
       question: "Dans quels cas l'utilisation du klaxon est-elle autorisée ?",
       answer: "En cas de danger immédiat ou pour signaler sa présence.",
       keywords: ["danger immédiat", "présence"],
       tip: "Hors agglo : autorisé pour signaler ton approche (virage sans visibilité). En agglo : danger immédiat uniquement.",
-      image: "/images/vehicule/klaxon.svg",
     },
     secours: {
       question: "A partir de quel âge peut-on suivre une formation aux premiers secours ?",
       answer: "A partir de 10 ans.",
       keywords: ["10 ans"],
       tip: "GQS (Gestes Qui Sauvent) = 2h, gratuit. PSC1 = 7h, payant mais complet. Le GQS peut se faire en collège.",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -1738,7 +1615,6 @@ export const questionSets: QuestionSet[] = [
       answer: "ALERTER: alerter immédiatement les secours. MASSER: pratiquer une réanimation cardio-pulmonaire. DEFIBRILLER: utiliser un défibrillateur automatique (DAE) si possible.",
       keywords: ["alerter", "masser", "défibriller", "DAE"],
       tip: "Le massage crée un flux sanguin artificiel. Le DAE peut relancer un cœur qui fibrille. Les deux sont complémentaires.",
-      image: "/images/secours/massage-cardiaque.svg",
     },
   },
   {
@@ -1748,14 +1624,12 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez le voyant de pression des pneumatiques (si équipé).",
       answer: "Le candidat montre le voyant TPMS.",
       tip: "Symbole pneu avec point d'exclamation. S'allume si pression insuffisante. Certains véhicules affichent la pression de chaque roue.",
-      image: "/images/vehicule/pneu-schema.svg",
     },
     securite: {
       question: "Que faire si ce voyant s'allume ?",
       answer: "S'arrêter dès que possible et vérifier la pression des pneumatiques.",
       keywords: ["arrêter", "vérifier pression"],
       tip: "Peut indiquer une crevaison lente. Vérifie visuellement puis gonfle ou va au garage. Ne roule pas longtemps avec un pneu sous-gonflé !",
-      image: "/images/vehicule/pneu-schema.svg",
     },
     secours: {
       question: "Dans quelle situation peut-on déplacer une victime ?",
@@ -1834,14 +1708,12 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez le bouton de désactivation de l'airbag passager (si équipé).",
       answer: "Le candidat montre le bouton ou contacteur.",
       tip: "Souvent dans la boîte à gants ou sur le côté du tableau de bord. Clé nécessaire pour le tourner.",
-      image: "/images/vehicule/airbag.svg",
     },
     securite: {
       question: "Dans quel cas doit-on désactiver l'airbag passager ?",
       answer: "Lorsqu'un siège enfant dos à la route est installé à l'avant.",
       keywords: ["siège enfant", "dos à la route"],
       tip: "Airbag + bébé dos à la route = danger mortel ! Le déploiement projette le siège violemment. Désactive TOUJOURS l'airbag dans ce cas.",
-      image: "/images/vehicule/airbag.svg",
     },
     secours: {
       question: "Comment est diffusée l'alerte émise par le Signal d'Alerte et d'Information aux Populations (SAIP) ?",
@@ -1857,21 +1729,18 @@ export const questionSets: QuestionSet[] = [
       question: "Contrôlez l'état des projecteurs antibrouillard avant (si équipé).",
       answer: "Propres, en bon état, pas de fissure.",
       tip: "En bas du pare-chocs. Vérifie qu'ils ne sont pas cassés, que les verres ne sont pas opaques.",
-      image: "/images/vehicule/feux-brouillard-avant.svg",
     },
     securite: {
       question: "Quand NE doit-on PAS utiliser les antibrouillards avant ?",
       answer: "Par temps clair, car ils peuvent éblouir les autres usagers.",
       keywords: ["temps clair", "éblouir"],
       tip: "Les AB avant éclairent large et bas. Par temps clair, ils sont inutiles et peuvent gêner les autres.",
-      image: "/images/vehicule/feux-brouillard-avant.svg",
     },
     secours: {
       question: "Pourquoi faut-il pratiquer immédiatement une réanimation cardio-pulmonaire sur une victime en arrêt cardiaque ?",
       answer: "Car les lésions du cerveau surviennent dès les premières minutes.",
       keywords: ["lésions cerveau", "premières minutes"],
       tip: "Sans massage, le cerveau meurt. Avec massage, tu gagnes du temps pour les secours et le DAE.",
-      image: "/images/secours/massage-cardiaque.svg",
     },
   },
   {
@@ -1902,21 +1771,18 @@ export const questionSets: QuestionSet[] = [
       question: "Vérifiez l'état des rétroviseurs extérieurs rabattables.",
       answer: "Les rétroviseurs doivent se rabattre et se déployer correctement.",
       tip: "Électriques ou manuels. Vérifie qu'ils restent en position une fois déployés, pas de jeu anormal.",
-      image: "/images/vehicule/retroviseur.svg",
     },
     securite: {
       question: "Quand les rétroviseurs rabattables sont-ils utiles ?",
       answer: "Pour le stationnement dans les espaces étroits ou dans les garages.",
       keywords: ["stationnement", "espaces étroits"],
       tip: "Certains véhicules les rabattent automatiquement au verrouillage. Attention à ne pas oublier de les redéployer avant de rouler !",
-      image: "/images/vehicule/retroviseur.svg",
     },
     secours: {
       question: "En cas de panne ou d'accident, quel équipement de sécurité doit être porté avant de quitter le véhicule ?",
       answer: "Il faut porter le gilet de haute visibilité avant de sortir du véhicule.",
       keywords: ["gilet", "haute visibilité"],
       tip: "La nuit, un piéton sans gilet est visible à 20m. Avec gilet : 150m. La différence peut sauver ta vie !",
-      image: "/images/secours/gilet-securite.svg",
     },
   },
   {
@@ -1938,7 +1804,6 @@ export const questionSets: QuestionSet[] = [
       answer: "Si la victime ne répond pas, ne réagit pas et respire.",
       keywords: ["ne répond pas", "respire", "PLS"],
       tip: "Femme enceinte visible : PLS sur le côté gauche (évite la compression de la veine cave).",
-      image: "/images/secours/pls.svg",
     },
   },
   {
@@ -1969,14 +1834,12 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez le voyant de défaillance moteur.",
       answer: "Le candidat montre le voyant moteur (check engine).",
       tip: "Symbole moteur stylisé (bloc avec vagues). Orange = consulte un garage. Clignotant = problème grave, arrête-toi.",
-      image: "/images/vehicule/temoin-avertissement.svg",
     },
     securite: {
       question: "Que signifie ce voyant s'il s'allume ?",
       answer: "Un dysfonctionnement du système de gestion du moteur ou des émissions polluantes.",
       keywords: ["dysfonctionnement", "émissions"],
       tip: "Souvent : capteur défaillant, problème d'injection, bougies... Pas forcément grave mais à faire vérifier.",
-      image: "/images/vehicule/temoin-avertissement.svg",
     },
     secours: {
       question: "Comment est composé le signal d'alerte du Système d'Alerte et d'Information des Populations (SAIP) diffusé par les sirènes ?",
@@ -2139,21 +2002,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez la commande des essuie-glaces automatiques (si équipé).",
       answer: "Le candidat montre la position AUTO sur le commodo.",
       tip: "Position 'AUTO' ou 'A' sur le commodo d'essuie-glace. Un capteur de pluie sur le pare-brise déclenche les balais.",
-      image: "/images/vehicule/essuie-glace.svg",
     },
     securite: {
       question: "Comment fonctionnent les essuie-glaces automatiques ?",
       answer: "Un capteur détecte les gouttes d'eau sur le pare-brise et adapte la vitesse d'essuyage.",
       keywords: ["capteur", "gouttes", "vitesse"],
       tip: "Le capteur est sur le rétroviseur intérieur. Si tu changes le pare-brise, vérifie que le capteur est recalibré.",
-      image: "/images/vehicule/essuie-glace.svg",
     },
     secours: {
       question: "A partir de quel âge peut-on suivre une formation aux premiers secours ?",
       answer: "A partir de 10 ans.",
       keywords: ["10 ans"],
       tip: "Le PSC1 te permet d'être utile en cas d'accident. Tu peux sauver une vie : celle d'un proche, d'un inconnu...",
-      image: "/images/secours/premiers-secours.svg",
     },
   },
   {
@@ -2163,21 +2023,18 @@ export const questionSets: QuestionSet[] = [
       question: "Vérifiez le bon état des balais d'essuie-glace.",
       answer: "Caoutchouc souple, pas craquelé, pas décollé.",
       tip: "Soulève le balai et passe le doigt sur le caoutchouc. Il doit être lisse et souple, pas dur ou fissuré.",
-      image: "/images/vehicule/essuie-glace.svg",
     },
     securite: {
       question: "A quelle fréquence faut-il changer les balais d'essuie-glace ?",
       answer: "Environ une fois par an ou dès qu'ils laissent des traces.",
       keywords: ["un an", "traces"],
       tip: "Change-les en septembre avant l'automne/hiver. En été, le soleil durcit le caoutchouc.",
-      image: "/images/vehicule/essuie-glace.svg",
     },
     secours: {
       question: "Quel comportement doit-on adopter en présence d'une victime en arrêt cardiaque ?",
       answer: "ALERTER: alerter immédiatement les secours. MASSER: pratiquer une réanimation cardio-pulmonaire. DEFIBRILLER: utiliser un défibrillateur automatique (DAE) si possible.",
       keywords: ["alerter", "masser", "défibriller", "DAE"],
       tip: "Ne t'arrête pas de masser sauf si : la victime reprend connaissance, les secours te relaient, tu es épuisé(e), ou le DAE le demande.",
-      image: "/images/secours/massage-cardiaque.svg",
     },
   },
   {
@@ -2229,21 +2086,18 @@ export const questionSets: QuestionSet[] = [
       question: "Montrez comment activer les feux de croisement.",
       answer: "Le candidat tourne la molette sur la position feux de croisement.",
       tip: "Symbole phare avec rayons vers le bas et vers la gauche. 2ème position après les veilleuses généralement.",
-      image: "/images/vehicule/feux-croisement.svg",
     },
     securite: {
       question: "Quand doit-on utiliser les feux de croisement ?",
       answer: "La nuit hors agglomération, en cas de visibilité réduite, dans les tunnels.",
       keywords: ["nuit", "visibilité réduite", "tunnels"],
       tip: "Les feux de croisement éclairent à 30m et ne doivent pas éblouir. Passe en route (100m) si la route est libre devant toi.",
-      image: "/images/vehicule/feux-croisement.svg",
     },
     secours: {
       question: "Quels comportements adopter en présence d'une victime qui ne répond pas et ne réagit pas, mais respire ?",
       answer: "La placer en position stable sur le côté ou position latérale de sécurité. Alerter les secours. Surveiller la respiration de la victime jusqu'à l'arrivée des secours.",
       keywords: ["PLS", "position latérale", "alerter", "surveiller"],
       tip: "Couvre la victime pour éviter l'hypothermie. Parle-lui même si elle ne répond pas, elle peut t'entendre.",
-      image: "/images/secours/pls.svg",
     },
   },
   {

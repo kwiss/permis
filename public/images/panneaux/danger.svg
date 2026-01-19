@@ -1,4 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <polygon points="32,4 60,56 4,56" fill="white" stroke="#CC0000" stroke-width="4"/>
-  <text x="32" y="48" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="black" text-anchor="middle">!</text>
-</svg>

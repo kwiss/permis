@@ -1,28 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { QuestionSet } from "@/data/questions";
-
-// Component to display an image if it exists
-function QuestionImage({ src, alt }: { src?: string; alt: string }) {
-  if (!src) return null;
-  return (
-    <div className="flex justify-center my-2">
-      <div className="relative w-24 h-24 rounded-md overflow-hidden bg-muted">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-contain p-2"
-          unoptimized={src.endsWith('.svg')}
-        />
-      </div>
-    </div>
-  );
-}
 
 interface StudyCardProps {
   questionSet: QuestionSet;
@@ -85,7 +66,6 @@ export function StudyCard({ questionSet, isMastered }: StudyCardProps) {
             </span>
           </div>
           <p className="text-base font-medium">{verification.question}</p>
-          <QuestionImage src={verification.image} alt={verification.question} />
           <div className="p-3 rounded-md bg-muted">
             <p className="text-sm">{verification.answer}</p>
           </div>
@@ -106,7 +86,6 @@ export function StudyCard({ questionSet, isMastered }: StudyCardProps) {
             <span className="text-sm font-medium">Sécurité Routière</span>
           </div>
           <p className="text-base font-medium">{securite.question}</p>
-          <QuestionImage src={securite.image} alt={securite.question} />
           <div className="p-3 rounded-md bg-muted">
             <p className="text-sm">
               {highlightKeywords(securite.answer, securite.keywords)}
@@ -138,7 +117,6 @@ export function StudyCard({ questionSet, isMastered }: StudyCardProps) {
             <span className="text-sm font-medium">Premiers Secours</span>
           </div>
           <p className="text-base font-medium">{secours.question}</p>
-          <QuestionImage src={secours.image} alt={secours.question} />
           <div className="p-3 rounded-md bg-muted">
             <p className="text-sm">
               {highlightKeywords(secours.answer, secours.keywords)}
