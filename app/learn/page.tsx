@@ -9,24 +9,33 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { useProgress } from "@/hooks/useProgress";
 import { questionSets } from "@/data/questions";
 
+type FilterMode = "all" | "unread" | "to-review";
+
 export default function LearnPage() {
-  const { markLearned, isMastered, getSetsToReview, stats, isLoaded } =
+  const { markLearned, isMastered, getSetsToReview, stats, isLoaded, getLearnedCount } =
     useProgress();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showMastered, setShowMastered] = useState(false);
+  const [filterMode, setFilterMode] = useState<FilterMode>("all");
 
   const allSetIds = useMemo(() => questionSets.map((s) => s.id), []);
 
+  const unreadCount = useMemo(() =>
+    allSetIds.filter((id) => getLearnedCount(id) === 0).length,
+    [allSetIds, getLearnedCount]
+  );
+
   const setsToShow = useMemo(() => {
-    if (showMastered) {
+    if (filterMode === "all") {
       return allSetIds;
     }
+    if (filterMode === "unread") {
+      const unread = allSetIds.filter((id) => getLearnedCount(id) === 0);
+      return unread.length > 0 ? unread : allSetIds;
+    }
+    // to-review: non-mastered
     const toReview = getSetsToReview(allSetIds);
-    if (toReview.length === 0) {
-      return allSetIds;
-    }
-    return toReview;
-  }, [allSetIds, getSetsToReview, showMastered]);
+    return toReview.length > 0 ? toReview : allSetIds;
+  }, [allSetIds, getSetsToReview, filterMode, getLearnedCount]);
 
   const currentSetId = setsToShow[currentIndex];
   const currentSet = questionSets.find((s) => s.id === currentSetId);
@@ -88,16 +97,36 @@ export default function LearnPage() {
       <Progress value={progressPercent} className="h-1 mb-4" />
 
       {/* Filter toggle */}
-      <div className="flex justify-center mb-4">
+      <div className="flex justify-center gap-2 mb-4 flex-wrap">
         <Button
-          variant={showMastered ? "outline" : "secondary"}
+          variant={filterMode === "all" ? "secondary" : "outline"}
           size="sm"
           onClick={() => {
-            setShowMastered(!showMastered);
+            setFilterMode("all");
             setCurrentIndex(0);
           }}
         >
-          {showMastered ? "Voir toutes les fiches" : "Masquer les maîtrisées"}
+          Toutes
+        </Button>
+        <Button
+          variant={filterMode === "unread" ? "secondary" : "outline"}
+          size="sm"
+          onClick={() => {
+            setFilterMode("unread");
+            setCurrentIndex(0);
+          }}
+        >
+          Non lues ({unreadCount})
+        </Button>
+        <Button
+          variant={filterMode === "to-review" ? "secondary" : "outline"}
+          size="sm"
+          onClick={() => {
+            setFilterMode("to-review");
+            setCurrentIndex(0);
+          }}
+        >
+          À réviser
         </Button>
       </div>
 

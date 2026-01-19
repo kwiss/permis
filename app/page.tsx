@@ -86,7 +86,7 @@ export default function HomePage() {
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center text-2xl">
-                  1
+                  📖
                 </div>
                 <div>
                   <h2 className="font-semibold text-lg">Apprentissage</h2>
@@ -104,12 +104,30 @@ export default function HomePage() {
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center text-2xl">
-                  2
+                  🚗
                 </div>
                 <div>
-                  <h2 className="font-semibold text-lg">Quiz</h2>
+                  <h2 className="font-semibold text-lg">Quiz Complet</h2>
                   <p className="text-sm text-muted-foreground">
-                    Simule l'examen avec 3 questions par set
+                    3 questions par set (examen réel)
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
+
+        <Link href="/quiz?mode=secours" className="block">
+          <Card className="hover:border-primary/50 transition-colors cursor-pointer">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center text-2xl">
+                  🚑
+                </div>
+                <div>
+                  <h2 className="font-semibold text-lg">Premiers Secours</h2>
+                  <p className="text-sm text-muted-foreground">
+                    Révise uniquement les questions secours
                   </p>
                 </div>
               </div>

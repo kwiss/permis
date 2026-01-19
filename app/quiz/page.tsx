@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,8 +13,13 @@ import { questionSets } from "@/data/questions";
 
 type QuizState = "idle" | "question" | "result";
 type QuestionPhase = 0 | 1 | 2;
+type QuizMode = "full" | "secours";
 
-export default function QuizPage() {
+function QuizContent() {
+  const searchParams = useSearchParams();
+  const mode: QuizMode = searchParams.get("mode") === "secours" ? "secours" : "full";
+  const isSecoursMode = mode === "secours";
+
   const {
     recordQuizAnswer,
     getRandomQuizSet,
@@ -29,16 +35,29 @@ export default function QuizPage() {
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [setsCompleted, setSetsCompleted] = useState(0);
   const [recentSets, setRecentSets] = useState<number[]>([]); // Cooldown: last 5 sets
+  const [discoveryMode, setDiscoveryMode] = useState(true); // Start with discovery mode
 
   const COOLDOWN_SIZE = 5; // Number of sets to exclude from selection
+  const maxPhase = isSecoursMode ? 0 : 2; // 1 question for secours, 3 for full
 
   const allSetIds = useMemo(() => questionSets.map((s) => s.id), []);
   const currentSet = currentSetId
     ? questionSets.find((s) => s.id === currentSetId)
     : null;
 
+  // Count sets never attempted in quiz
+  const attemptedSetIds = useMemo(() => {
+    const attempted = new Set<number>();
+    allSetIds.forEach(id => {
+      if (getQuizHistory(id)) attempted.add(id);
+    });
+    return attempted;
+  }, [allSetIds, getQuizHistory]);
+
+  const neverAttemptedCount = allSetIds.length - attemptedSetIds.size;
+
   const startNewSet = useCallback(() => {
-    const setId = getRandomQuizSet(allSetIds, recentSets);
+    const setId = getRandomQuizSet(allSetIds, recentSets, discoveryMode);
     setCurrentSetId(setId);
     setQuestionPhase(0);
     setAnswers([]);
@@ -49,14 +68,14 @@ export default function QuizPage() {
       const updated = [...prev, setId];
       return updated.slice(-COOLDOWN_SIZE);
     });
-  }, [allSetIds, getRandomQuizSet, recentSets]);
+  }, [allSetIds, getRandomQuizSet, recentSets, discoveryMode]);
 
   const handleAnswer = useCallback(
     (isCorrect: boolean) => {
       const newAnswers = [...answers, isCorrect];
       setAnswers(newAnswers);
 
-      if (questionPhase < 2) {
+      if (questionPhase < maxPhase) {
         setQuestionPhase((prev) => (prev + 1) as QuestionPhase);
       } else {
         const allCorrect = newAnswers.every((a) => a);
@@ -67,11 +86,21 @@ export default function QuizPage() {
         setQuizState("result");
       }
     },
-    [answers, questionPhase, currentSetId, recordQuizAnswer]
+    [answers, questionPhase, currentSetId, recordQuizAnswer, maxPhase]
   );
 
   const getQuestionData = useCallback(() => {
     if (!currentSet) return null;
+
+    // In secours mode, always show the secours question
+    if (isSecoursMode) {
+      return {
+        type: "SECOURS" as const,
+        question: currentSet.secours.question,
+        answer: currentSet.secours.answer,
+        keywords: currentSet.secours.keywords,
+      };
+    }
 
     switch (questionPhase) {
       case 0:
@@ -96,7 +125,7 @@ export default function QuizPage() {
           keywords: currentSet.secours.keywords,
         };
     }
-  }, [currentSet, questionPhase]);
+  }, [currentSet, questionPhase, isSecoursMode]);
 
   if (!isLoaded) {
     return (
@@ -122,15 +151,18 @@ export default function QuizPage() {
         </div>
 
         <div className="flex-1 flex flex-col items-center justify-center text-center">
-          <h1 className="text-2xl font-bold mb-2">Mode Quiz</h1>
+          <h1 className="text-2xl font-bold mb-2">
+            {isSecoursMode ? "Premiers Secours" : "Mode Quiz"}
+          </h1>
           <p className="text-muted-foreground mb-8 max-w-xs">
-            Réponds aux 3 questions comme lors de l'examen réel. Si tu réponds
-            correctement 3 fois de suite, la fiche est maîtrisée.
+            {isSecoursMode
+              ? "Révise les questions de premiers secours. 3 bonnes réponses de suite = maîtrisé."
+              : "Réponds aux 3 questions comme lors de l'examen réel. Si tu réponds correctement 3 fois de suite, la fiche est maîtrisée."}
           </p>
 
           <Card className="w-full mb-6">
             <CardContent className="p-4">
-              <div className="grid grid-cols-2 gap-4 text-center">
+              <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
                   <div className="text-2xl font-bold">
                     {stats.totalMastered}
@@ -139,13 +171,45 @@ export default function QuizPage() {
                 </div>
                 <div>
                   <div className="text-2xl font-bold">
-                    {notMasteredCount}
+                    {neverAttemptedCount}
                   </div>
-                  <div className="text-xs text-muted-foreground">À réviser</div>
+                  <div className="text-xs text-muted-foreground">Non vues</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">
+                    {notMasteredCount - neverAttemptedCount}
+                  </div>
+                  <div className="text-xs text-muted-foreground">En cours</div>
                 </div>
               </div>
             </CardContent>
           </Card>
+
+          {/* Mode toggle */}
+          <div className="flex gap-2 mb-6 w-full max-w-xs">
+            <Button
+              variant={discoveryMode ? "secondary" : "outline"}
+              size="sm"
+              className="flex-1"
+              onClick={() => setDiscoveryMode(true)}
+            >
+              Découverte
+            </Button>
+            <Button
+              variant={!discoveryMode ? "secondary" : "outline"}
+              size="sm"
+              className="flex-1"
+              onClick={() => setDiscoveryMode(false)}
+            >
+              Révision
+            </Button>
+          </div>
+
+          <p className="text-xs text-muted-foreground mb-4 max-w-xs">
+            {discoveryMode
+              ? "Voir tous les sets avant de répéter"
+              : "Prioriser les sets proches de la maîtrise"}
+          </p>
 
           <Button size="lg" className="w-full max-w-xs" onClick={startNewSet}>
             Commencer le Quiz
@@ -181,7 +245,7 @@ export default function QuizPage() {
 
         {/* Progress dots */}
         <div className="flex justify-center gap-2 mb-6">
-          {[0, 1, 2].map((i) => (
+          {Array.from({ length: maxPhase + 1 }, (_, i) => (
             <div
               key={i}
               className={`w-3 h-3 rounded-full transition-colors ${
@@ -216,7 +280,8 @@ export default function QuizPage() {
   // Result state
   if (quizState === "result" && currentSet) {
     const correctCount = answers.filter((a) => a).length;
-    const allCorrect = correctCount === 3;
+    const totalQuestions = maxPhase + 1;
+    const allCorrect = correctCount === totalQuestions;
     const history = getQuizHistory(currentSetId!);
 
     return (
@@ -247,7 +312,7 @@ export default function QuizPage() {
           </div>
 
           <p className="text-lg font-semibold mb-2">
-            {correctCount}/3 bonnes réponses
+            {correctCount}/{totalQuestions} {totalQuestions === 1 ? "bonne réponse" : "bonnes réponses"}
           </p>
 
           {allCorrect && isMastered(currentSetId!) && (
@@ -282,4 +347,16 @@ export default function QuizPage() {
   }
 
   return null;
+}
+
+export default function QuizPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-pulse text-muted-foreground">Chargement...</div>
+      </div>
+    }>
+      <QuizContent />
+    </Suspense>
+  );
 }

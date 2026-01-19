@@ -133,13 +133,40 @@ export function useProgress() {
 
   // Get sets to review (not mastered, prioritize sets close to mastery)
   const getSetsToReview = useCallback(
-    (allSetIds: number[]) => {
+    (allSetIds: number[], discoveryMode: boolean = false) => {
       const notMastered = allSetIds.filter((id) => !state.mastered.includes(id));
 
       // Shuffle first for randomness among equal priorities
       const shuffled = [...notMastered].sort(() => Math.random() - 0.5);
 
-      // Sort by priority:
+      if (discoveryMode) {
+        // Discovery mode: prioritize never attempted sets first
+        // 1) Never attempted
+        // 2) Sets with errors (need practice)
+        // 3) Sets with low streak
+        return shuffled.sort((a, b) => {
+          const historyA = state.quizHistory[a];
+          const historyB = state.quizHistory[b];
+
+          // Priority 1: Never attempted first
+          if (!historyA && historyB) return -1;
+          if (historyA && !historyB) return 1;
+
+          // Priority 2: Sets with wrong answers
+          const wrongA = historyA?.incorrect || 0;
+          const wrongB = historyB?.incorrect || 0;
+          if (wrongA !== wrongB) return wrongB - wrongA;
+
+          // Priority 3: Lower streak first
+          const streakA = historyA?.streak || 0;
+          const streakB = historyB?.streak || 0;
+          if (streakA !== streakB) return streakA - streakB;
+
+          return 0;
+        });
+      }
+
+      // Review mode: prioritize sets close to mastery
       // 1) Sets with streak 1-2 (close to mastery, need to continue!)
       // 2) Sets with wrong answers (need practice)
       // 3) Sets with streak 0 but attempted (failed recently)
@@ -180,8 +207,8 @@ export function useProgress() {
 
   // Get random set for quiz (prioritize non-mastered, exclude recent sets)
   const getRandomQuizSet = useCallback(
-    (allSetIds: number[], excludeSetIds: number[] = []) => {
-      const toReview = getSetsToReview(allSetIds);
+    (allSetIds: number[], excludeSetIds: number[] = [], discoveryMode: boolean = false) => {
+      const toReview = getSetsToReview(allSetIds, discoveryMode);
 
       // Filter out recently played sets for cooldown
       const availableForReview = toReview.filter(id => !excludeSetIds.includes(id));
