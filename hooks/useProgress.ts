@@ -131,7 +131,7 @@ export function useProgress() {
     setState(defaultState);
   }, []);
 
-  // Get sets to review (not mastered, prioritize those with wrong answers)
+  // Get sets to review (not mastered, prioritize sets close to mastery)
   const getSetsToReview = useCallback(
     (allSetIds: number[]) => {
       const notMastered = allSetIds.filter((id) => !state.mastered.includes(id));
@@ -139,24 +139,37 @@ export function useProgress() {
       // Shuffle first for randomness among equal priorities
       const shuffled = [...notMastered].sort(() => Math.random() - 0.5);
 
-      // Sort by: 1) has wrong answers (priority), 2) never attempted, 3) least streak
+      // Sort by priority:
+      // 1) Sets with streak 1-2 (close to mastery, need to continue!)
+      // 2) Sets with wrong answers (need practice)
+      // 3) Sets with streak 0 but attempted (failed recently)
+      // 4) Never attempted sets
       return shuffled.sort((a, b) => {
         const historyA = state.quizHistory[a];
         const historyB = state.quizHistory[b];
 
-        // Prioritize sets with wrong answers
+        const streakA = historyA?.streak || 0;
+        const streakB = historyB?.streak || 0;
+
+        // Priority 1: Sets close to mastery (streak 1-2) come first
+        const closeToMasteryA = streakA > 0 && streakA < MASTERY_THRESHOLD;
+        const closeToMasteryB = streakB > 0 && streakB < MASTERY_THRESHOLD;
+        if (closeToMasteryA && !closeToMasteryB) return -1;
+        if (!closeToMasteryA && closeToMasteryB) return 1;
+
+        // Among close-to-mastery, higher streak = closer to mastery = higher priority
+        if (closeToMasteryA && closeToMasteryB) {
+          if (streakA !== streakB) return streakB - streakA;
+        }
+
+        // Priority 2: Sets with wrong answers
         const wrongA = historyA?.incorrect || 0;
         const wrongB = historyB?.incorrect || 0;
         if (wrongA !== wrongB) return wrongB - wrongA;
 
-        // Then prioritize never attempted
-        if (!historyA && historyB) return -1;
-        if (historyA && !historyB) return 1;
-
-        // Then by streak (lower streak = needs more practice)
-        const streakA = historyA?.streak || 0;
-        const streakB = historyB?.streak || 0;
-        if (streakA !== streakB) return streakA - streakB;
+        // Priority 3: Attempted sets before never attempted
+        if (historyA && !historyB) return -1;
+        if (!historyA && historyB) return 1;
 
         // Equal priority: keep random order from shuffle
         return 0;
