@@ -223,6 +223,8 @@ function QuizContent() {
   if (quizState === "question" && currentSet) {
     const questionData = getQuestionData();
     if (!questionData) return null;
+    const currentHistory = getQuizHistory(currentSetId!);
+    const currentStreak = currentHistory?.streak || 0;
 
     return (
       <main className="min-h-screen p-4 max-w-md mx-auto flex flex-col">
@@ -233,14 +235,18 @@ function QuizContent() {
             </Button>
           </Link>
           <div className="flex items-center gap-2">
-            {isMastered(currentSetId!) && (
-              <Badge variant="secondary">Maîtrisé</Badge>
-            )}
-            <span className="text-sm text-muted-foreground">
-              Set #{setsCompleted + 1}
-            </span>
             <ThemeToggle />
           </div>
+        </div>
+
+        {/* Progress indicators */}
+        <div className="flex justify-between items-center mb-4 text-sm">
+          <span className="text-muted-foreground">
+            Maîtrisés: <span className="font-bold text-foreground">{stats.totalMastered}/100</span>
+          </span>
+          <span className="text-muted-foreground">
+            Set #{currentSet.id} · Série: <span className="font-bold text-foreground">{currentStreak}/3</span>
+          </span>
         </div>
 
         {/* Progress dots */}
