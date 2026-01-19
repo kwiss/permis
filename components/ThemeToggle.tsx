@@ -2,6 +2,7 @@
 
 import { useTheme } from "@/hooks/useTheme";
 import { Button } from "@/components/ui/button";
+import { Sun, Moon } from "lucide-react";
 
 export function ThemeToggle() {
   const { theme, toggleTheme, isLoaded } = useTheme();
@@ -11,11 +12,11 @@ export function ThemeToggle() {
   return (
     <Button
       variant="ghost"
-      size="sm"
+      size="icon"
       onClick={toggleTheme}
       className="fixed top-4 right-4 z-50"
     >
-      {theme === "dark" ? "☀️" : "🌙"}
+      {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
     </Button>
   );
 }
