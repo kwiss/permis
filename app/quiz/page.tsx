@@ -37,7 +37,7 @@ function QuizContent() {
   const [recentSets, setRecentSets] = useState<number[]>([]); // Cooldown: last 5 sets
   const [discoveryMode, setDiscoveryMode] = useState(true); // Start with discovery mode
 
-  const COOLDOWN_SIZE = 5; // Number of sets to exclude from selection
+  const COOLDOWN_SIZE = 10; // Number of sets to exclude from selection
   const maxPhase = isSecoursMode ? 0 : 2; // 1 question for secours, 3 for full
 
   const allSetIds = useMemo(() => questionSets.map((s) => s.id), []);

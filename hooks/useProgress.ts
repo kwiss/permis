@@ -224,8 +224,8 @@ export function useProgress() {
         return allSetIds[Math.floor(Math.random() * allSetIds.length)];
       }
 
-      // Pick from top 10 priority sets for variety
-      const pool = availableForReview.slice(0, Math.min(10, availableForReview.length));
+      // Pick from top 30 priority sets for more variety
+      const pool = availableForReview.slice(0, Math.min(30, availableForReview.length));
       return pool[Math.floor(Math.random() * pool.length)];
     },
     [getSetsToReview]
