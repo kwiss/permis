@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ThemeToggle } from "./ThemeToggle";
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
@@ -24,10 +23,5 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     );
   }
 
-  return (
-    <>
-      <ThemeToggle />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

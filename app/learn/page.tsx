@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { StudyCard } from "@/components/StudyCard";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useProgress } from "@/hooks/useProgress";
 import { questionSets } from "@/data/questions";
 
@@ -75,9 +76,12 @@ export default function LearnPage() {
             ← Retour
           </Button>
         </Link>
-        <span className="text-sm text-muted-foreground font-mono">
-          {currentIndex + 1}/{setsToShow.length}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-muted-foreground font-mono">
+            {currentIndex + 1}/{setsToShow.length}
+          </span>
+          <ThemeToggle />
+        </div>
       </div>
 
       {/* Progress */}

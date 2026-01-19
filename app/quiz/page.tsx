@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { QuizCard } from "@/components/QuizCard";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useProgress } from "@/hooks/useProgress";
 import { questionSets } from "@/data/questions";
 
@@ -111,12 +112,13 @@ export default function QuizPage() {
 
     return (
       <main className="min-h-screen p-4 max-w-md mx-auto flex flex-col">
-        <div className="flex items-center mb-8">
+        <div className="flex items-center justify-between mb-8">
           <Link href="/">
             <Button variant="ghost" size="sm">
               ← Retour
             </Button>
           </Link>
+          <ThemeToggle />
         </div>
 
         <div className="flex-1 flex flex-col items-center justify-center text-center">
@@ -173,6 +175,7 @@ export default function QuizPage() {
             <span className="text-sm text-muted-foreground">
               Set #{setsCompleted + 1}
             </span>
+            <ThemeToggle />
           </div>
         </div>
 
@@ -218,6 +221,9 @@ export default function QuizPage() {
 
     return (
       <main className="min-h-screen p-4 max-w-md mx-auto flex flex-col">
+        <div className="flex justify-end mb-4">
+          <ThemeToggle />
+        </div>
         <div className="flex-1 flex flex-col items-center justify-center text-center">
           <h1 className="text-2xl font-bold mb-2">
             {allCorrect ? "Parfait !" : "Continue !"}

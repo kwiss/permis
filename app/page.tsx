@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useProgress } from "@/hooks/useProgress";
 import { questionSets } from "@/data/questions";
 import { useState } from "react";
@@ -40,7 +41,10 @@ export default function HomePage() {
   return (
     <main className="min-h-screen p-4 max-w-md mx-auto flex flex-col">
       {/* Header */}
-      <div className="text-center py-8">
+      <div className="flex justify-end mb-2">
+        <ThemeToggle />
+      </div>
+      <div className="text-center pb-8">
         <h1 className="text-2xl font-bold mb-2">Permis B</h1>
         <p className="text-muted-foreground">
           Révise les vérifications du permis de conduire
